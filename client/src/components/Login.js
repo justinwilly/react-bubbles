@@ -1,13 +1,36 @@
 import React from "react";
 
-const Login = () => {
-  // make a post request to retrieve a token from the api
-  // when you have handled the token, navigate to the BubblePage route
+import useForm from "../hooks/useForm";
+
+const Login = props => {
+  const { handleChanges, handleLoginSubmit, values } = useForm(submit);
+
+  function submit() {
+    props.history.push("/bubbles");
+  }
+
   return (
-    <>
-      <h1>Welcome to the Bubble App!</h1>
-      <p>Build a login page here</p>
-    </>
+    <div className="login-container">
+      <form onSubmit={handleLoginSubmit}>
+        <label>User Name:</label>
+        <input
+          type="text"
+          name="username"
+          placeholder="User Name"
+          value={values.username}
+          onChange={handleChanges}
+        />
+        <label>Password:</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={values.password}
+          onChange={handleChanges}
+        />
+        <button>Login</button>
+      </form>
+    </div>
   );
 };
 
